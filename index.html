@@ -3,98 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Med MindMaps</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+}
+
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f2fbfa;
-    color:#123;
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3fbfa;
+color:#173b40;
 }
+
 header{
-    background:#087f8c;
-    color:white;
-    padding:30px 20px;
-    text-align:center;
+background:linear-gradient(135deg,#087f8c,#10a7a1);
+color:white;
+padding:35px 20px;
+text-align:center;
 }
+
 header h1{
-    margin:0 0 10px;
-    font-size:32px;
+margin:0 0 10px;
+font-size:32px;
 }
+
 header p{
-    margin:0;
+margin:0;
+font-size:16px;
 }
+
 .container{
-    max-width:1000px;
-    margin:auto;
-    padding:20px;
+max-width:1000px;
+margin:auto;
+padding:25px 18px;
 }
+
 .search{
-    width:100%;
-    box-sizing:border-box;
-    padding:15px;
-    border:1px solid #ccc;
-    border-radius:12px;
-    font-size:16px;
-    margin-bottom:20px;
+width:100%;
+padding:15px;
+border:1px solid #d5dddd;
+border-radius:14px;
+font-size:16px;
+margin-bottom:18px;
 }
+
 .categories{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:25px;
 }
+
 .categories button{
-    border:0;
-    padding:10px 15px;
-    border-radius:20px;
-    background:#d5eeee;
-    cursor:pointer;
+border:0;
+background:#d9eeee;
+color:#17616a;
+padding:10px 16px;
+border-radius:20px;
+font-size:14px;
+cursor:pointer;
 }
+
+.categories button:hover{
+background:#bce3e3;
+}
+
 .products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
 }
+
 .card{
-    background:white;
-    padding:20px;
-    border-radius:16px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
+background:white;
+border-radius:18px;
+padding:22px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
+
+.icon{
+font-size:42px;
+margin-bottom:10px;
+}
+
 .card h2{
-    font-size:20px;
+margin:5px 0 12px;
+font-size:21px;
 }
+
+.description{
+color:#617477;
+line-height:1.8;
+}
+
 .price{
-    color:#087f8c;
-    font-size:20px;
-    font-weight:bold;
+font-size:21px;
+font-weight:bold;
+color:#087f8c;
+margin:18px 0;
 }
+
 .buy{
-    width:100%;
-    border:0;
-    background:#087f8c;
-    color:white;
-    padding:13px;
-    border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
+width:100%;
+border:0;
+background:#087f8c;
+color:white;
+padding:14px;
+border-radius:12px;
+font-size:17px;
+cursor:pointer;
 }
+
+.buy:hover{
+background:#066d77;
+}
+
 footer{
-    text-align:center;
-    padding:30px;
-    color:#666;
+text-align:center;
+padding:35px 15px;
+color:#718083;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <h1>🧠 Med MindMaps</h1>
-<p>مایندمپ‌های پزشکی برای مرور سریع و مؤثر</p>
+
+<p>
+مایندمپ‌های پزشکی برای مرور سریع و مؤثر
+</p>
+
 </header>
+
 
 <div class="container">
 
@@ -106,72 +154,151 @@ placeholder="🔎 جستجوی مایندمپ..."
 oninput="showProducts()"
 >
 
+
 <div class="categories">
-<button onclick="filterProducts('همه')">همه</button>
-<button onclick="filterProducts('قلب')">قلب</button>
-<button onclick="filterProducts('اورژانس')">اورژانس</button>
-<button onclick="filterProducts('تنفس')">تنفس</button>
-<button onclick="filterProducts('کودکان')">کودکان</button>
-<button onclick="filterProducts('داروشناسی')">داروشناسی</button>
+
+<button onclick="filterProducts('همه')">
+همه
+</button>
+
+<button onclick="filterProducts('قلب')">
+قلب
+</button>
+
+<button onclick="filterProducts('اورژانس')">
+اورژانس
+</button>
+
+<button onclick="filterProducts('تنفس')">
+تنفس
+</button>
+
+<button onclick="filterProducts('کودکان')">
+کودکان
+</button>
+
+<button onclick="filterProducts('داروشناسی')">
+داروشناسی
+</button>
+
 </div>
 
-<div class="products" id="products"></div>
+
+<div
+class="products"
+id="products">
+</div>
 
 </div>
+
 
 <footer>
+
 Med MindMaps © 2026
+
 </footer>
 
+
 <script>
+
 
 const products = [
 
 {
-name:"مایندمپ ACLS",
-category:"اورژانس",
-description:"مرور سریع الگوریتم‌های ACLS",
-price:30000
-},
 
-{
 name:"مایندمپ آریتمی‌های قلبی",
+
 category:"قلب",
-description:"مرور جامع آریتمی‌های مهم",
-price:30000
+
+description:
+"مرور سریع و طبقه‌بندی‌شده آریتمی‌های مهم قلبی",
+
+price:30000,
+
+icon:"❤️"
+
 },
 
 {
+
+name:"مایندمپ ACLS",
+
+category:"اورژانس",
+
+description:
+"مرور سریع الگوریتم‌های ACLS",
+
+price:30000,
+
+icon:"🚑"
+
+},
+
+{
+
 name:"مایندمپ ECG",
+
 category:"قلب",
-description:"مرور نکات مهم تفسیر ECG",
-price:30000
+
+description:
+"مرور نکات مهم تفسیر ECG",
+
+price:30000,
+
+icon:"📈"
+
 },
 
 {
+
 name:"مایندمپ اورژانس‌های تنفسی",
+
 category:"تنفس",
-description:"مرور سریع اورژانس‌های تنفسی",
-price:30000
+
+description:
+"مرور سریع اورژانس‌های تنفسی",
+
+price:30000,
+
+icon:"🫁"
+
 },
 
 {
+
 name:"مایندمپ انسداد راه هوایی کودکان",
+
 category:"کودکان",
-description:"مرور تشخیص و درمان انسداد راه هوایی",
-price:30000
+
+description:
+"مرور تشخیص و درمان انسداد راه هوایی",
+
+price:30000,
+
+icon:"👶"
+
 },
 
 {
+
 name:"مایندمپ داروهای اورژانس",
+
 category:"داروشناسی",
-description:"مرور داروهای مهم و کاربردی اورژانس",
-price:30000
+
+description:
+"مرور داروهای مهم و کاربردی اورژانس",
+
+price:30000,
+
+icon:"💊"
+
 }
 
 ];
 
+
 let currentCategory="همه";
+
 
 function filterProducts(category){
 
@@ -181,40 +308,67 @@ showProducts();
 
 }
 
+
 function showProducts(){
 
-const search=document.getElementById("search").value.toLowerCase();
+const search=
+document.getElementById("search")
+.value
+.toLowerCase();
 
-const container=document.getElementById("products");
 
-const filtered=products.filter(product=>{
+const container=
+document.getElementById("products");
+
+
+const filtered=
+products.filter(product=>{
 
 const matchesSearch=
-product.name.toLowerCase().includes(search);
+product.name
+.toLowerCase()
+.includes(search);
+
 
 const matchesCategory=
-currentCategory==="همه" ||
+currentCategory==="همه"
+||
 product.category===currentCategory;
 
-return matchesSearch && matchesCategory;
+
+return matchesSearch &&
+matchesCategory;
 
 });
 
-container.innerHTML=filtered.map(product=>`
+
+container.innerHTML=
+filtered.map(product=>`
 
 <div class="card">
 
-<h2>${product.name}</h2>
+<div class="icon">
+${product.icon}
+</div>
 
-<p>${product.description}</p>
+<h2>
+${product.name}
+</h2>
 
-<p class="price">
-${product.price.toLocaleString("fa-IR")} تومان
+<p class="description">
+${product.description}
 </p>
 
-<button class="buy"
+<div class="price">
+${product.price.toLocaleString("fa-IR")} تومان
+</div>
+
+<button
+class="buy"
 onclick="buyProduct('${product.name}')">
+
 خرید مایندمپ
+
 </button>
 
 </div>
@@ -223,17 +377,19 @@ onclick="buyProduct('${product.name}')">
 
 }
 
+
 function buyProduct(name){
 
 alert(
-"خرید «"+name+"» به‌زودی فعال می‌شود."
+"🧠 ${name}\n\nپرداخت و دریافت فایل به‌زودی فعال می‌شود."
 );
 
 }
+
 
 showProducts();
 
 </script>
 
 </body>
-  </html>
+</html>
