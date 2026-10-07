@@ -114,10 +114,6 @@ font-size:17px;
 cursor:pointer;
 }
 
-.buy:hover{
-background:#066d77;
-}
-
 .modal{
 display:none;
 position:fixed;
@@ -133,7 +129,7 @@ padding:20px;
 .modal-content{
 background:white;
 max-width:500px;
-margin:60px auto;
+margin:50px auto;
 padding:25px;
 border-radius:20px;
 text-align:center;
@@ -158,14 +154,15 @@ direction:ltr;
 letter-spacing:1px;
 }
 
-.confirm{
+.telegram{
 display:block;
-background:#087f8c;
+background:#229ED9;
 color:white;
 padding:14px;
 border-radius:12px;
 text-decoration:none;
 margin-top:15px;
+font-size:17px;
 }
 
 .close{
@@ -230,8 +227,6 @@ id="products">
 </div>
 
 
-<!-- پنجره پرداخت -->
-
 <div
 class="modal"
 id="paymentModal">
@@ -265,17 +260,19 @@ id="paymentModal">
 </div>
 
 <p>
-پس از کارت‌به‌کارت، رسید پرداخت خود را نگه دارید.
+پس از پرداخت، رسید خود را در تلگرام ارسال کنید.
 </p>
 
-<a
-class="confirm"
-href="#"
-onclick="confirmPayment()">
 
-✅ پرداخت را انجام دادم
+<a
+class="telegram"
+href="https://t.me/MedicalMindMaps_ir_bot"
+target="_blank">
+
+📩 ارسال رسید در تلگرام
 
 </a>
+
 
 <button
 class="close"
@@ -440,15 +437,6 @@ document.getElementById("paymentModal").style.display="block";
 function closeModal(){
 
 document.getElementById("paymentModal").style.display="none";
-
-}
-
-
-function confirmPayment(){
-
-alert(
-"✅ مرحله بعد:\n\nپس از پرداخت، رسید خود را برای فروشنده ارسال کنید.\n\nسیستم ارسال خودکار رسید در مرحله بعد فعال می‌شود."
-);
 
 }
 
