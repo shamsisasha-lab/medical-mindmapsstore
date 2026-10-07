@@ -68,10 +68,6 @@ font-size:14px;
 cursor:pointer;
 }
 
-.categories button:hover{
-background:#bce3e3;
-}
-
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -122,6 +118,65 @@ cursor:pointer;
 background:#066d77;
 }
 
+.modal{
+display:none;
+position:fixed;
+z-index:1000;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.55);
+padding:20px;
+}
+
+.modal-content{
+background:white;
+max-width:500px;
+margin:60px auto;
+padding:25px;
+border-radius:20px;
+text-align:center;
+}
+
+.modal-content h2{
+color:#087f8c;
+}
+
+.payment-box{
+background:#f3fbfa;
+padding:18px;
+border-radius:15px;
+margin:20px 0;
+line-height:2;
+}
+
+.card-number{
+font-size:20px;
+font-weight:bold;
+direction:ltr;
+letter-spacing:1px;
+}
+
+.confirm{
+display:block;
+background:#087f8c;
+color:white;
+padding:14px;
+border-radius:12px;
+text-decoration:none;
+margin-top:15px;
+}
+
+.close{
+background:#eee;
+border:0;
+padding:10px 20px;
+border-radius:10px;
+cursor:pointer;
+margin-top:10px;
+}
+
 footer{
 text-align:center;
 padding:35px 15px;
@@ -157,29 +212,12 @@ oninput="showProducts()"
 
 <div class="categories">
 
-<button onclick="filterProducts('همه')">
-همه
-</button>
-
-<button onclick="filterProducts('قلب')">
-قلب
-</button>
-
-<button onclick="filterProducts('اورژانس')">
-اورژانس
-</button>
-
-<button onclick="filterProducts('تنفس')">
-تنفس
-</button>
-
-<button onclick="filterProducts('کودکان')">
-کودکان
-</button>
-
-<button onclick="filterProducts('داروشناسی')">
-داروشناسی
-</button>
+<button onclick="filterProducts('همه')">همه</button>
+<button onclick="filterProducts('قلب')">قلب</button>
+<button onclick="filterProducts('اورژانس')">اورژانس</button>
+<button onclick="filterProducts('تنفس')">تنفس</button>
+<button onclick="filterProducts('کودکان')">کودکان</button>
+<button onclick="filterProducts('داروشناسی')">داروشناسی</button>
 
 </div>
 
@@ -187,6 +225,66 @@ oninput="showProducts()"
 <div
 class="products"
 id="products">
+</div>
+
+</div>
+
+
+<!-- پنجره پرداخت -->
+
+<div
+class="modal"
+id="paymentModal">
+
+<div class="modal-content">
+
+<h2>🧠 خرید مایندمپ</h2>
+
+<h3 id="productName"></h3>
+
+<div class="price">
+۳۰٬۰۰۰ تومان
+</div>
+
+<div class="payment-box">
+
+<strong>روش پرداخت: کارت‌به‌کارت</strong>
+
+<br>
+
+شماره کارت آزمایشی:
+
+<div class="card-number">
+6037-XXXX-XXXX-1234
+</div>
+
+<br>
+
+به نام: صاحب حساب
+
+</div>
+
+<p>
+پس از کارت‌به‌کارت، رسید پرداخت خود را نگه دارید.
+</p>
+
+<a
+class="confirm"
+href="#"
+onclick="confirmPayment()">
+
+✅ پرداخت را انجام دادم
+
+</a>
+
+<button
+class="close"
+onclick="closeModal()">
+
+بستن
+
+</button>
+
 </div>
 
 </div>
@@ -201,101 +299,57 @@ Med MindMaps © 2026
 
 <script>
 
-
 const products = [
 
 {
-
 name:"مایندمپ آریتمی‌های قلبی",
-
 category:"قلب",
-
-description:
-"مرور سریع و طبقه‌بندی‌شده آریتمی‌های مهم قلبی",
-
+description:"مرور سریع و طبقه‌بندی‌شده آریتمی‌های مهم قلبی",
 price:30000,
-
 icon:"❤️"
-
 },
 
 {
-
 name:"مایندمپ ACLS",
-
 category:"اورژانس",
-
-description:
-"مرور سریع الگوریتم‌های ACLS",
-
+description:"مرور سریع الگوریتم‌های ACLS",
 price:30000,
-
 icon:"🚑"
-
 },
 
 {
-
 name:"مایندمپ ECG",
-
 category:"قلب",
-
-description:
-"مرور نکات مهم تفسیر ECG",
-
+description:"مرور نکات مهم تفسیر ECG",
 price:30000,
-
 icon:"📈"
-
 },
 
 {
-
 name:"مایندمپ اورژانس‌های تنفسی",
-
 category:"تنفس",
-
-description:
-"مرور سریع اورژانس‌های تنفسی",
-
+description:"مرور سریع اورژانس‌های تنفسی",
 price:30000,
-
 icon:"🫁"
-
 },
 
 {
-
 name:"مایندمپ انسداد راه هوایی کودکان",
-
 category:"کودکان",
-
-description:
-"مرور تشخیص و درمان انسداد راه هوایی",
-
+description:"مرور تشخیص و درمان انسداد راه هوایی",
 price:30000,
-
 icon:"👶"
-
 },
 
 {
-
 name:"مایندمپ داروهای اورژانس",
-
 category:"داروشناسی",
-
-description:
-"مرور داروهای مهم و کاربردی اورژانس",
-
+description:"مرور داروهای مهم و کاربردی اورژانس",
 price:30000,
-
 icon:"💊"
-
 }
 
 ];
-
 
 let currentCategory="همه";
 
@@ -316,10 +370,8 @@ document.getElementById("search")
 .value
 .toLowerCase();
 
-
 const container=
 document.getElementById("products");
-
 
 const filtered=
 products.filter(product=>{
@@ -329,12 +381,10 @@ product.name
 .toLowerCase()
 .includes(search);
 
-
 const matchesCategory=
 currentCategory==="همه"
 ||
 product.category===currentCategory;
-
 
 return matchesSearch &&
 matchesCategory;
@@ -380,8 +430,24 @@ onclick="buyProduct('${product.name}')">
 
 function buyProduct(name){
 
+document.getElementById("productName").innerText=name;
+
+document.getElementById("paymentModal").style.display="block";
+
+}
+
+
+function closeModal(){
+
+document.getElementById("paymentModal").style.display="none";
+
+}
+
+
+function confirmPayment(){
+
 alert(
-"🧠 ${name}\n\nپرداخت و دریافت فایل به‌زودی فعال می‌شود."
+"✅ مرحله بعد:\n\nپس از پرداخت، رسید خود را برای فروشنده ارسال کنید.\n\nسیستم ارسال خودکار رسید در مرحله بعد فعال می‌شود."
 );
 
 }
